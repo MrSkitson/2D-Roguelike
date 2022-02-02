@@ -59,11 +59,39 @@ public class BoardManager : MonoBehaviour
     void Start()
     {
         
+        gridPositions.RemoveAt (randomIndex);
+        //Return the randomly selected Vector3 position
+        return RandomPosition;
+    }
+    //LayoutObjectAtRandom accepts an array of game objects to choose from along with a min and max range for number of objects to create
+    void LoyoutObjectAtRandom (GameObject[] tileArray, int minimum, int maximum)
+    {
+        //Choose a random number of objects to instantiate within the min and max limits
+        int objectCount = Random.Range (minimum, maximum + 1);
+        //Loop instantiate abohects until the randomly chosen limit
+        for(int i = 0; i < objectCount; i++)
+        {
+            //Choose a position for randomPosition
+            Vector3 randomPosition = RandomPosition();
+            //Choose a random tile from tileArray
+            GameObject tileChoise = tileArray[Random.Range (0, tileArray.Length)];
+            //Instantiate tileChoise ate the position returned by RandomPosition
+            Instantiate(tileChoise, randomPosition, Quaternion.identity);
+        }
     }
 
-    // Update is called once per frame
-    void Update()
+//SetupScene initializes our level and calls the previous functions to lay out the game board
+    public void SetupScene (int level)
     {
-        
+        BoardSetup ();          //creates the outer walls and floor
+        InitialisateList ();            //Reset list if gridpositions
+        LoyoutObjectAtRandom (wallTiles, wallCount.minimum, wallCount.maximum);     //Instantiate a random number of wall
+        LoyoutObjectAtRandom (foodTiles, foodCount.minimum, foodCount.maximum);     //Instantiate a random number of food
+        int enemyCount = (int)Mathf.Log(level, 2f);                     //Determine number of enemies based on current level number
+        LoyoutObjectAtRandom (enemyTiles, enemyCount, enemyCount);      // Instantiate a random number of enemies at randomized postions
+        Instantiate (exit, new Vector3 (columns - 1, rows - 1, 0f), Quaternion.identity);       //Instantiate the exit tile
+    
+
     }
+
 }
