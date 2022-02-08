@@ -2,6 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.SceneManagement;
+using UnityEngine.UI;
 
 //Player inherits from MovingObject, our bas class for objects that can move
 public class Player : MovingObject
@@ -129,8 +130,9 @@ public class Player : MovingObject
     //Restart reloads the scene when called
     private void Restart ()
     {
-        Application.LoadLevel(Application.loadedLevel);
-        //SceneManager.LoadScene (0);
+       
+        SceneManager.LoadScene (0);  
+        //Application.LoadLevel(Application.LoadedLevel);
     }
 
     //Called when an enemy attacks the player, it takes a parametr loss which specifoes how many pointes to lose
