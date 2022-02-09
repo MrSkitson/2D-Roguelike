@@ -1,3 +1,6 @@
 Base path: '/Users/user/Desktop/JS start/2020.3.19f1/Unity.app/Contents', plugins path '/Users/user/Desktop/JS start/2020.3.19f1/PlaybackEngines'
 Cmd: initializeCompiler
 
+Cmd: shutdown
+
+Quitting shader compiler process

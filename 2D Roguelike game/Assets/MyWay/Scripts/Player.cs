@@ -52,7 +52,7 @@ public class Player : MovingObject
         int vertical = 0; //USed to store the vertical move diraction
 
         //Get input from the maneger, round it to an integer and store in horizontal to set a axis move direction
-        horizontal = (int) (Input.GetAxisRaw ("Horixontal"));
+        horizontal = (int) (Input.GetAxisRaw ("Horizontal"));
         //Get input from the manager, round it to an integer and store in vertical to set y axis move direction
         vertical = (int) (Input.GetAxisRaw ("Vertical"));
 
