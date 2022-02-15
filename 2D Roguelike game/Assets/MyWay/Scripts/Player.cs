@@ -15,6 +15,8 @@ public class Player : MovingObject
     public int pointsPerSoda = 20;
     //How much damage a player does to a wall when chopping it
     public float restartLevelDelay = 1f;
+    //text to desplay current food have player
+    public Text foodText;
 
     //Used to store a refrence to the Player's animator component
     private Animator animator;
@@ -29,6 +31,8 @@ public class Player : MovingObject
         
         //Get the current food point total stored in GameManager.instance between levels
         food = GameManager.instance.playerFoodPoints;
+        //Set the text "Food" and append current food have player 
+        foodText.text = "Food: " + food;
 
         //Call the Start fuction of the MovingObject base class
         base.Start ();
@@ -76,6 +80,8 @@ public class Player : MovingObject
     {
         //Every time player moves, substract from food points total
         food --;
+        //Set the text "Food" current food have player
+        foodText.text = "Food: " + food;
         //Call the AttemptMove method of the vase clase, passing in the component T(Wall) and x and y direction to move 
         base.AttemptMove <T> (xDir, yDir);
         //Hit allows us to reference the result of the Linecast done in Move
@@ -102,6 +108,8 @@ public class Player : MovingObject
         {
             //Add pointsPerFood to the players current food total
             food += pointsPerFood;
+            //Set the text curent food have player
+            foodText.text = "+" + pointsPerFood + " Food: " + food;
             //Disable the food object the player collided with
             other.gameObject.SetActive (false);
         }
@@ -110,6 +118,8 @@ public class Player : MovingObject
         {
             //Add pointsPerSoda to players food points total
             food += pointsPerSoda;
+            //Set the text current player have food
+            foodText.text = "+" + pointsPerSoda + "Food: " + food;
             //Disable the soda object the player collided with
             other.gameObject.SetActive (false);
         }
@@ -142,6 +152,8 @@ public class Player : MovingObject
         animator.SetTrigger ("playerHit");
         //Subtract lost food points from players total
         food -= loss;
+        //Set the text current have player food
+        foodText.text = "-" + loss + " Food: " + food;
         //Check to see if game has ended
         CheckIfGameOver ();
     }
